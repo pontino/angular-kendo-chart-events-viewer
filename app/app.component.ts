@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
     <kendo-chart>
       <kendo-chart-series>
         <kendo-chart-series-item
-          type="rangeBar"
+          type="rangeColumn"
           categoryField="category"
           [stack]="'yes'"
           fromField="min"
@@ -52,17 +52,33 @@ import { Component, OnInit } from '@angular/core';
 
       <kendo-chart-series-item *ngFor="let d of data4"
           [border]="{ width: 0 }"
-          type="bar"
+          type="column"
           [stack]="d.group"
           categoryField="category"
           field="dis"
           tooltipField="tooltip"
           [data]="d.data">
+          <kendo-chart-series-item-tooltip format="miovalore"></kendo-chart-series-item-tooltip>
       </kendo-chart-series-item>
 
     </kendo-chart-series>
 
   </kendo-chart>
+
+
+<kendo-chart>
+  <kendo-chart-series>
+        <kendo-chart-series-item
+          type="column"
+          categoryField="category"
+          [stack]="'yes'"
+          field="min"
+          toField="max"
+          [data]="data5">
+      </kendo-chart-series-item>
+    </kendo-chart-series>
+</kendo-chart>
+
   `
 })
 export class AppComponent implements OnInit {
@@ -150,6 +166,12 @@ export class AppComponent implements OnInit {
         ]
       }
     ];
+
+  public data5: any[] = [
+    { min: new Date(1000000), max: new Date(3000000), category: 'p1' },
+    { min: new Date(1500000), max: new Date(3500000), category: 'p2' },
+    { min: new Date(2000000), max: new Date(3000000), category: 'p3' }
+  ];
   
   ngOnInit(){
 
